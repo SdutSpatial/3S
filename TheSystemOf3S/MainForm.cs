@@ -149,8 +149,7 @@ namespace TheSystemOf3S
         //状态栏的地图信息
         private void mainMap_OnMouseMove(object sender, IMapControlEvents2_OnMouseMoveEvent e)
         {
-            //XYLabel.Text = System.IO.Path.GetFileName(mainMap.DocumentFilename);
-            mapStatus.Text = string.Format("   比例尺 1:{0}        当前坐标 X ={1}  Y={2} {3}",((long)mainMap.MapScale).ToString(), e.mapX.ToString("#######.##"), e.mapY.ToString("#######.##"), mainMap.MapUnits.ToString().Substring(4));
+            toolStripStatusLabel1.Text = string.Format("   比例尺 1:{0}        当前坐标 X ={1}  Y={2} {3}", ((long)mainMap.MapScale).ToString(), e.mapX.ToString("#######.##"), e.mapY.ToString("#######.##"), mainMap.MapUnits.ToString().Substring(4));
         }
 
 

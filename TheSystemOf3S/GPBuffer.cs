@@ -36,14 +36,11 @@ namespace TheSystemOf3S
         }
         public void buffer()
         {
-            
-
                 pActiveView = m_Map.ActiveView;
                 pMap = m_Map.Map;
                 Geoprocessor gp = new Geoprocessor();
                 gp.OverwriteOutput = true;
                 ESRI.ArcGIS.AnalysisTools.Buffer pBuffer = new ESRI.ArcGIS.AnalysisTools.Buffer();
-
                 pLayer = pMap.get_Layer(index);
                 IFeatureLayer featLayer;
                 featLayer = pLayer as IFeatureLayer;
