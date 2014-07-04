@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.Analyst3D;
+using ESRI.ArcGIS.AnalysisTools;
 using ESRI.ArcGIS.NetworkAnalysis;
+using DevComponents.DotNetBar;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Display;
 using ESRI.ArcGIS.esriSystem;
@@ -19,20 +21,23 @@ using ESRI.ArcGIS.Output;
 using ESRI.ArcGIS.SystemUI;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.ADF;
+using TheSystemOf3S.空间分析.缓冲区;
 
-using Operations;
+//using Operations;
 
 namespace TheSystemOf3S
 {
     public partial class MainForm : Form
     {
         #region 变量声明
-        public IMapControl2 pMapControl;
-        private PopMenu pM;
+        static public IMapControl2 pMapControl;
         private PopMenu PM;
         private MapToPro m_MapToPro;
         private int MouseDownFlag;
-        private ConvexHull CH;
+       
+        private IUnitConverter convert = new UnitConverterClass();
+     
+        private BufferAnalysis Sbp;
         //private NetworkAnalysis Network;
         #endregion
 
@@ -46,7 +51,7 @@ namespace TheSystemOf3S
         private void Form1_Load(object sender, EventArgs e)
         {
             PM = new PopMenu(mainMap, pMapControl, axTOCControl1);
-
+            Sbp = new BufferAnalysis(mainMap);
         }
 
         #region 鹰眼图
@@ -149,7 +154,10 @@ namespace TheSystemOf3S
         //状态栏的地图信息
         private void mainMap_OnMouseMove(object sender, IMapControlEvents2_OnMouseMoveEvent e)
         {
+           
             toolStripStatusLabel1.Text = string.Format("   比例尺 1:{0}        当前坐标 X ={1}  Y={2} {3}", ((long)mainMap.MapScale).ToString(), e.mapX.ToString("#######.##"), e.mapY.ToString("#######.##"), mainMap.MapUnits.ToString().Substring(4));
+           // statusStrip1.Text = Math.Round(e.mapX, 3).ToString() + "  " + Math.Round(e.mapY, 3).ToString() + " 米";
+            //MS.MeasureMouseMove(e);
         }
 
 
@@ -200,8 +208,8 @@ namespace TheSystemOf3S
         private void aToolStripMenuItem1_Click(object sender, EventArgs e)
         {
 
-            BufferForm f2 = new BufferForm(mainMap);
-            f2.Show();
+            //BufferForm f2 = new BufferForm(mainMap);
+            //f2.Show();
         }
 
         private void 地图查询ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -210,6 +218,11 @@ namespace TheSystemOf3S
             m_MapToPro.Show();
             MouseDownFlag = 5;
         }
+        //private void mainMap_OnMouseMove(object sender, IMapControlEvents2_OnMouseMoveEvent e)
+        //{
+        //   // Mapcoordinate.Text = Math.Round(e.mapX, 3).ToString() + "  " + Math.Round(e.mapY, 3).ToString() + " 米";
+        //    MS.MeasureMouseMove(e);
+        //}
 
         private void mainMap_OnMouseDown(object sender, IMapControlEvents2_OnMouseDownEvent e)
         {
@@ -227,7 +240,7 @@ namespace TheSystemOf3S
                     //case 3: Network.Ds.OnMouseDown(e); break;
                     //case 4: MS.MeasureMouseDown(e); break;
                     case 5: m_MapToPro.QueryProMouseDown(pMapControl); break;
-                    //case 6: Sbp.OnMouseDown(e); break;
+                    case 6: Sbp.OnMouseDown(e); break;
                 }
             }
             //if (e.button == 2)
@@ -240,12 +253,79 @@ namespace TheSystemOf3S
 
         private void 属性查询ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProToMap m_ProToMap = new ProToMap(mainMap);
-            m_ProToMap.ShowDialog();
+            ProToMap p2m = new ProToMap(mainMap);
+            p2m.Show();
+            //ProToMap m_ProToMap = new ProToMap(mainMap);
+            //m_ProToMap.ShowDialog();
+        }
+        /// <summary>
+        /// 缓冲区分析
+        /// </summary>
+        /// <param name="layerName"></param>
+        /// <param name="sWhere"></param>
+        /// <param name="iSize"></param>
+        /// <param name="imap"></param>
+        /// <returns></returns>
+       
+       
+        private void bufferToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel1.Visible=true;
+
+            ILayer pLayer;
+            for (int i = 0; i < mainMap.Map.LayerCount; i++)
+            {
+                pLayer = mainMap.Map.get_Layer(i);
+                comboBox2.Items.Add(pLayer.Name);
+            }
+          
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MapAnalysis mapAnalysis = new MapAnalysis();
+            mapAnalysis.Buffer(comboBox2.Text, "name=" + "'" + textBox1.Text + "'", Convert.ToDouble(textBox2.Text), mainMap.Map);
+            IActiveView activeView;
+            activeView = mainMap.ActiveView;
+            activeView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, 0, mainMap.Extent);
+        }
 
+      
 
-   
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bufferQueryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel2.Visible = true;
+        }
+
+        private void PointBufferAnalysis_Click(object sender, EventArgs e)
+        {
+            MouseDownFlag = 6;
+            Sbp.BufferType = 1;
+            Sbp.IsStart = true;
+        }
+
+        private void LineBufferAnalysis_Click(object sender, EventArgs e)
+        {
+            MouseDownFlag = 6;
+            Sbp.BufferType = 2;
+            Sbp.IsStart = true;
+        }
+
+        private void PolygonBufferAnalysis_Click(object sender, EventArgs e)
+        {
+            MouseDownFlag = 6;
+            Sbp.BufferType = 3;
+            Sbp.IsStart = true;
+        }
+
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            Sbp.ClearResults();
+        }       
     }
 }

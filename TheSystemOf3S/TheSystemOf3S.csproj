@@ -63,6 +63,9 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar2">
+      <HintPath>E:\Users\zhang\Desktop\GIS二次开发\程序\CSharp\bin\Debug\DevComponents.DotNetBar2.dll</HintPath>
+    </Reference>
     <Reference Include="ESRI.ArcGIS.3DAnalyst, Version=10.2.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -107,7 +110,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="ESRI.ArcGIS.System, Version=10.2.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="ESRI.ArcGIS.SystemUI, Version=10.2.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -128,38 +131,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BufferForm.cs">
+    <Compile Include="空间分析\缓冲区\BufferAnalysis.cs" />
+    <Compile Include="DataOperator.cs" />
+    <Compile Include="空间分析\缓冲区\BufferQuery.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConvexHull.cs" />
-    <Compile Include="GPBuffer.cs" />
+    <Compile Include="空间分析\缓冲区\BufferQuery.Designer.cs">
+      <DependentUpon>BufferQuery.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MapToPro.cs">
+    <Compile Include="空间分析\缓冲区\MapAnalysis.cs" />
+    <Compile Include="空间分析\查询\MapToPro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MapToPro.Designer.cs">
+    <Compile Include="空间分析\查询\MapToPro.Designer.cs">
       <DependentUpon>MapToPro.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyList.cs">
+    <Compile Include="空间分析\查询\PropertyList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PropertyList.Designer.cs">
+    <Compile Include="空间分析\查询\PropertyList.Designer.cs">
       <DependentUpon>PropertyList.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProToMap.cs">
+    <Compile Include="空间分析\查询\ProToMap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProToMap.Designer.cs">
+    <Compile Include="空间分析\查询\ProToMap.Designer.cs">
       <DependentUpon>ProToMap.cs</DependentUpon>
     </Compile>
-    <Compile Include="RelativePath.cs" />
     <Compile Include="Tool1.cs" />
     <Compile Include="右键菜单\AttributeTableFrm.cs">
       <SubType>Form</SubType>
@@ -174,11 +180,11 @@
     <Compile Include="右键菜单\RemoveLayer.cs" />
     <Compile Include="右键菜单\ScaleThresholds.cs" />
     <Compile Include="右键菜单\ZoomToLayer.cs" />
-    <EmbeddedResource Include="BufferForm.resx" />
+    <EmbeddedResource Include="空间分析\缓冲区\BufferForm.resx" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MapToPro.resx">
+    <EmbeddedResource Include="空间分析\查询\MapToPro.resx">
       <DependentUpon>MapToPro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -191,14 +197,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="PropertyList.resx">
+    <EmbeddedResource Include="空间分析\查询\PropertyList.resx">
       <DependentUpon>PropertyList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProToMap.resx">
+    <EmbeddedResource Include="空间分析\查询\ProToMap.resx">
       <DependentUpon>ProToMap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="右键菜单\AttributeTableFrm.resx">
       <DependentUpon>AttributeTableFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="空间分析\缓冲区\BufferQuery.resx">
+      <DependentUpon>BufferQuery.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

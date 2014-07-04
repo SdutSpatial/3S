@@ -38,9 +38,6 @@
             this.NotLessThan = new System.Windows.Forms.Button();
             this.NotEqual = new System.Windows.Forms.Button();
             this.NotMoreThan = new System.Windows.Forms.Button();
-            this.Not = new System.Windows.Forms.Button();
-            this.And = new System.Windows.Forms.Button();
-            this.Or = new System.Windows.Forms.Button();
             this.Mod = new System.Windows.Forms.Button();
             this.LeftBrackets = new System.Windows.Forms.Button();
             this.rightBrackets = new System.Windows.Forms.Button();
@@ -60,7 +57,7 @@
             // 
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 12;
-            this.listBox2.Location = new System.Drawing.Point(181, 172);
+            this.listBox2.Location = new System.Drawing.Point(180, 177);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(215, 136);
             this.listBox2.TabIndex = 33;
@@ -79,6 +76,12 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "building",
+            "Land_Planning",
+            "LandMark",
+            "river-bridge",
+            "road"});
             this.comboBox1.Location = new System.Drawing.Point(147, 12);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 20);
@@ -154,36 +157,6 @@
             this.NotMoreThan.UseVisualStyleBackColor = true;
             this.NotMoreThan.Click += new System.EventHandler(this.NotMoreThan_Click);
             // 
-            // Not
-            // 
-            this.Not.Location = new System.Drawing.Point(25, 292);
-            this.Not.Name = "Not";
-            this.Not.Size = new System.Drawing.Size(44, 23);
-            this.Not.TabIndex = 41;
-            this.Not.Text = "not";
-            this.Not.UseVisualStyleBackColor = true;
-            this.Not.Click += new System.EventHandler(this.Not_Click);
-            // 
-            // And
-            // 
-            this.And.Location = new System.Drawing.Point(71, 292);
-            this.And.Name = "And";
-            this.And.Size = new System.Drawing.Size(41, 23);
-            this.And.TabIndex = 42;
-            this.And.Text = "and";
-            this.And.UseVisualStyleBackColor = true;
-            this.And.Click += new System.EventHandler(this.And_Click);
-            // 
-            // Or
-            // 
-            this.Or.Location = new System.Drawing.Point(116, 292);
-            this.Or.Name = "Or";
-            this.Or.Size = new System.Drawing.Size(44, 23);
-            this.Or.TabIndex = 43;
-            this.Or.Text = "or";
-            this.Or.UseVisualStyleBackColor = true;
-            this.Or.Click += new System.EventHandler(this.Or_Click);
-            // 
             // Mod
             // 
             this.Mod.Location = new System.Drawing.Point(25, 263);
@@ -216,7 +189,7 @@
             // 
             // Is
             // 
-            this.Is.Location = new System.Drawing.Point(25, 321);
+            this.Is.Location = new System.Drawing.Point(25, 301);
             this.Is.Name = "Is";
             this.Is.Size = new System.Drawing.Size(52, 23);
             this.Is.TabIndex = 47;
@@ -226,7 +199,7 @@
             // 
             // Like
             // 
-            this.Like.Location = new System.Drawing.Point(103, 321);
+            this.Like.Location = new System.Drawing.Point(103, 301);
             this.Like.Name = "Like";
             this.Like.Size = new System.Drawing.Size(57, 23);
             this.Like.TabIndex = 48;
@@ -329,9 +302,6 @@
             this.Controls.Add(this.rightBrackets);
             this.Controls.Add(this.LeftBrackets);
             this.Controls.Add(this.Mod);
-            this.Controls.Add(this.Or);
-            this.Controls.Add(this.And);
-            this.Controls.Add(this.Not);
             this.Controls.Add(this.NotMoreThan);
             this.Controls.Add(this.NotEqual);
             this.Controls.Add(this.NotLessThan);
@@ -362,9 +332,6 @@
         private System.Windows.Forms.Button NotLessThan;
         private System.Windows.Forms.Button NotEqual;
         private System.Windows.Forms.Button NotMoreThan;
-        private System.Windows.Forms.Button Not;
-        private System.Windows.Forms.Button And;
-        private System.Windows.Forms.Button Or;
         private System.Windows.Forms.Button Mod;
         private System.Windows.Forms.Button LeftBrackets;
         private System.Windows.Forms.Button rightBrackets;

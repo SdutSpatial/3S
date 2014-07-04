@@ -12,6 +12,7 @@ using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.Display;
 using ESRI.ArcGIS.SystemUI;
+using ESRI.ArcGIS.esriSystem;
 
 namespace TheSystemOf3S
 {
@@ -34,7 +35,6 @@ namespace TheSystemOf3S
             pMap = MapCtrl.Map;
         }
 
-    
         #region 属性查询
 
         #region 运算符
@@ -73,21 +73,6 @@ namespace TheSystemOf3S
             textBox1.Text += " <= ";
         }
 
-        private void Not_Click(object sender, EventArgs e)
-        {
-            textBox1.Text += " Not ";
-        }
-
-        private void And_Click(object sender, EventArgs e)
-        {
-            textBox1.Text += " And ";
-        }
-
-        private void Or_Click(object sender, EventArgs e)
-        {
-            textBox1.Text += " Or ";
-        }
-
         private void Mod_Click(object sender, EventArgs e)
         {
             textBox1.Text += " % ";
@@ -113,7 +98,11 @@ namespace TheSystemOf3S
             textBox1.Text += " is ";
         }
         #endregion
-
+        /// <summary>
+        /// 获取图层字段值
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBox1_TextChanged(object sender, EventArgs e)
         {
             listBox2.Items.Clear();
@@ -168,14 +157,7 @@ namespace TheSystemOf3S
 
         private void ProToMap_Load(object sender, EventArgs e)
         {
-            comboBox1.Items.Clear();
-       
-           int layCount = pMap.LayerCount;
-            for (int i = 0; i < layCount; i++)
-            {
-                comboBox1.Items.Add(pMap.get_Layer(i).Name);
-            }
-
+           
         }
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
